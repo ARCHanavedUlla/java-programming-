@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+class Bank {
+    // Method to get the rate of interest based on the bank name
+    public double getRateOfInterest(String bankName) {
+        switch (bankName.toUpperCase()) {
+            case "SBI":
+                return 8.4;
+            case "ICICI":
+                return 7.3;
+            case "AXIS":
+                return 9.7;
+            default:
+                System.out.println("Invalid bank name. Returning default rate of interest (0.0%).");
+                return 0.0;
+        }
+    }
+}
+
+public class BankInterestRate {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input the bank name
+        System.out.print("Enter the bank name (SBI, ICICI, AXIS): ");
+        String bankName = scanner.next();
+
+        // Create an instance of the Bank class
+        Bank bank = new Bank();
+
+        // Get and display the rate of interest
+        double rateOfInterest = bank.getRateOfInterest(bankName);
+        System.out.println("Rate of Interest for " + bankName + ": " + rateOfInterest + "%");
+
+        scanner.close();
+    }
+}
