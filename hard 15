@@ -1,0 +1,33 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class RansomNote {
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        Map<Character, Integer> magazineMap = new HashMap<>();
+
+        // Populate the map with characters and their frequencies from magazine
+        for (char ch : magazine.toCharArray()) {
+            magazineMap.put(ch, magazineMap.getOrDefault(ch, 0) + 1);
+        }
+
+        // Check if characters in ransomNote can be constructed using characters from magazine
+        for (char ch : ransomNote.toCharArray()) {
+            if (magazineMap.containsKey(ch) && magazineMap.get(ch) > 0) {
+                magazineMap.put(ch, magazineMap.get(ch) - 1);
+            } else {
+                return false; // Character not available in magazine
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        String ransomNote = "aabb";
+        String magazine = "aabbc";
+
+        boolean result = canConstruct(ransomNote, magazine);
+
+        System.out.println("Can construct ransom note: " + result);
+    }
+}
