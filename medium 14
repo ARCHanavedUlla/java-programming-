@@ -1,0 +1,42 @@
+class Superclass {
+    static int x; // static variable in superclass
+
+    // Parameterized constructor in superclass
+    Superclass(int value) {
+        x = value;
+        System.out.println("Superclass constructor called with value: " + value);
+    }
+
+    // Static method in superclass
+    static void display() {
+        System.out.println("Static method in superclass. x = " + x);
+    }
+}
+
+class Subclass extends Superclass {
+    static int y; // static variable in subclass
+
+    // Parameterized constructor in subclass
+    Subclass(int value) {
+        super(value); // Calling the parameterized constructor of the superclass
+        y = value;
+        System.out.println("Subclass constructor called with value: " + value);
+    }
+
+    // Static method in subclass hiding the static method in superclass
+    static void display() {
+        System.out.println("Static method in subclass. y = " + y);
+    }
+}
+
+public class MethodHidingExample {
+    public static void main(String[] args) {
+        Subclass obj = new Subclass(10);
+
+        // Call static method using subclass reference
+        Subclass.display();
+
+        // Call static method using superclass reference
+        Superclass.display();
+    }
+}
