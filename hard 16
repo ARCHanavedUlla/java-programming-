@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class KWeakestRows {
+    public static int[] kWeakestRows(int[][] mat, int k) {
+        int m = mat.length;
+        int n = mat[0].length;
+
+        // Create a list of rows with their total soldier count and index
+        List<int[]> rows = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            int soldiers = 0;
+
+            for (int j = 0; j < n; j++) {
+                soldiers += mat[i][j];
+            }
+
+            rows.add(new int[]{i, soldiers});
+        }
+
+        // Sort the list based on soldier count and row index
+        rows.sort((a, b) -> a[1] != b[1] ? Integer.compare(a[1], b[1]) : Integer.compare(a[0], b[0]));
+
+        // Extract the indices of the k weakest rows
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = rows.get(i)[0];
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {1, 1, 0, 0, 0},
+            {1, 1, 1, 1, 0},
+            {1, 0, 0, 0, 0},
+            {1, 1, 0, 0, 0},
+            {1, 1, 1, 1, 1}
+        };
+
+        int k = 3;
+        int[] result = kWeakestRows(matrix, k);
+
+        System.out.println("Indices of the k weakest rows: " + Arrays.toString(result));
+    }
+}
